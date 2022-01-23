@@ -21,7 +21,9 @@ if (5 <= $hour && $hour <= 12) {
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
   <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
-
+  <!-- Vue.js を読み込む -->
+  <script src="https://unpkg.com/vue"></script>
+  
 </head>
 
 <body>
@@ -42,6 +44,9 @@ if (5 <= $hour && $hour <= 12) {
           <div class="d-flex align-items-center">
             ID {!! $id = Auth::user()->id; !!} 番 {!! $name = Auth::user()->name; !!} さん、<?php echo $msg; ?>　
           </div>
+<!--
+          <li class="nav-item">{!! link_to_route('events.testvue', 'vue', [], ['class' => 'nav-link']) !!}</li>
+-->
           <li class="nav-item">{!! link_to_route('users.info', '説明', [], ['class' => 'nav-link']) !!}</li>
           <li class="nav-item">{!! link_to_route('events', '出来事一覧', [], ['class' => 'nav-link']) !!}</li>
           <li class="nav-item">{!! link_to_route('three_columns', '3コラム一覧', [], ['class' => 'nav-link']) !!}</li>
@@ -58,7 +63,7 @@ if (5 <= $hour && $hour <= 12) {
           </div>
 
           @else
-
+          <li class="nav-item">{!! link_to_route('top', 'TOP', [], ['class' => 'nav-link']) !!}</li>
           <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
           <li class="nav-item">{!! link_to_route('signup.get', '会員登録', [], ['class' => 'nav-link']) !!}</li>
 
@@ -77,6 +82,8 @@ if (5 <= $hour && $hour <= 12) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="{{ asset('/js/main.js') }}"></script>
+    
+    
 </body>
 
 </html>

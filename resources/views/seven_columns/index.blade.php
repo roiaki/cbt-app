@@ -2,14 +2,12 @@
 
 @section('content')
 
-
 <h3>7コラム一覧</h3>
 
-
+@if (count($seven_columns) > 0)
 <table class="table table-striped table-bordered">
   <thead>
     <tr class="table-primary">
-
       <th>id</th>
       <th>タイトル</th>
       <th>内容</th>
@@ -30,11 +28,9 @@
   </tbody>
 </table>
 
-
-
-
 <div class="d-flex justify-content-center">
   {{ $seven_columns->links('pagination::bootstrap-4') }}
 </div>
+@endif
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // ユーザ登録後のリダイレクト先
+    // ログイン後のリダイレクト先
     protected $redirectTo = '/events'; // 変更
 
     /**
@@ -40,4 +41,6 @@ class LoginController extends Controller
         // guest とは、ログイン認証されていない閲覧者
         $this->middleware('guest')->except('logout');
     }
+
+ 
 }

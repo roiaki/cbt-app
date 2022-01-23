@@ -152,7 +152,12 @@ return [
         'content' => '内容',
         'emotion_name' => '感情名',
         'emotion_strength' => '感情の強さ',
-        'thinking' => '考えたこと'
+        'thinking' => '考えたこと',
+        'habit' => '考えたの癖',
+        'basis_thinking' => '考えの根拠',
+        'opposite_fact' => '逆の事実',
+        'new_thinking' => '新しい考え',
+        'new_emotion' => '新しい感情'
     ],
 
 ];

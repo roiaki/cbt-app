@@ -56,10 +56,22 @@ p {
 
 .buttons-first {
     display: inline-block;
+<<<<<<< HEAD
     margin: 10px 20px 0px 0px;
+=======
+    margin:  20px 20px 20px 0px;
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
 }
 
 .buttons {
     display: inline-block;
+<<<<<<< HEAD
     margin: 10px 20px;
+=======
+    margin: 20px 20px;
+}
+
+.welcome {
+    margin-top: 70px; 
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
 }

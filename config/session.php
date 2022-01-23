@@ -31,9 +31,10 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 30), // 120から30へ変更
 
-    'expire_on_close' => false,
+    // デフォルトは、ブラウザを閉じても維持する
+    'expire_on_close' => true, // true　へ変更 ブラウザ閉じたらログアウト
 
     /*
     |--------------------------------------------------------------------------

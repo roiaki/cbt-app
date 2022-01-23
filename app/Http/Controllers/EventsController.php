@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Models\Event;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class EventsController extends Controller
@@ -14,12 +16,11 @@ class EventsController extends Controller
     public function index()
     {
         $data = [];
-        if (\Auth::check()) {
-            $user = \Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
             $events = $user->events()->orderBy('updated_at', 'desc')->paginate(5);
 
             $data = [
-                'user' => $user,
                 'events' => $events,
             ];
         }
@@ -28,48 +29,39 @@ class EventsController extends Controller
     }
 
     // getでevents/createにアクセスされた場合の「新規登録画面表示処理」
-    public function create()
+    public function create(Request $request)
     {
-        $event = new Event;
-
-        // 第二引数：連想配列でテンプレートに渡すデータ　[キー　=> バリュー]
-        return view('events.create', [
-            'event' => $event
-        ]);
+        return view('events.create');
     }
 
-    // postで/eventsへアクセス　保存処理
+    // 保存処理
     public function store(Request $request)
     {
         $this->validate(
             $request,
             [
-                //'title' => 'required|max:30',
+                'title' => 'required|max:30',
                 'content' => 'required|max:255',
             ]
         );
 
         // クロージャでトランザクション処理
         $event = DB::transaction(function () use($request) {
-            
+
             $event = new Event;
-            // 送られてきたフォームの内容は　$request　に入っている。
             $event->title = $request->title;
             $event->content = $request->content;
-    
-            // ログインしているユーザーIDを渡す
-            $event->user_id = \Auth::id();
-    
+            $event->user_id = Auth::id();
+
             $event->save();
 
             return $event;
         });
-        
-       
+
         return view('events.show', ['event' => $event]);
     }
 
-    
+
     // 詳細ページ表示処理
     public function show($id)
     {
@@ -89,7 +81,6 @@ class EventsController extends Controller
     // 出来事更新処理
     public function update(Request $request, $id)
     {
-
         $this->validate($request, [
             'title' => 'required|max:30',
             'content' => 'required|max:255',
@@ -100,12 +91,12 @@ class EventsController extends Controller
         // クロージャでトランザクション
         DB::transaction(function () use($event, $request) {
             $event->title = $request->title;
-            $event->content = $request->content;           
-            $event->updated_at = date("Y-m-d h:m:s");
-    
+            $event->content = $request->content;
+            $event->updated_at = date("Y-m-d G:i:s");
+
             $event->save();
         });
-        
+
         return redirect('/events');
     }
 
@@ -116,15 +107,32 @@ class EventsController extends Controller
         if ( $event ) {
             $event->delete();
         }
+<<<<<<< HEAD
         
 
         return redirect()->route('/events');
         //return redirect('/events');
+=======
+
+        return redirect('events');
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
     }
 
     public function info()
     {
         return view('/users/info');
+    }
+
+    public function testvue()
+    {
+        return view('events.testvue');
+    }
+
+    public function vuepost(Request $request)
+    {
+        dd($request);
+        var_dump("test");
+        return view('events.testvue');
     }
 
     // ロールバック時のエラー制御メソッド

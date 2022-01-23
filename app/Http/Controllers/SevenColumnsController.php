@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\ThreeColumn;    // 追加
 use App\Models\SevenColumn;
-use DB;                        // 追加
+use App\Models\ThreeColumn;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class SevenColumnsController extends Controller
@@ -14,9 +15,9 @@ class SevenColumnsController extends Controller
     public function index()
     {
         $data = [];
-        if (\Auth::check()) {
-            $user = \Auth::user();
-            $sevencolumns = $user->seven_columns()->orderBy('updated_at', 'desc')->paginate(10);
+        if (Auth::check()) {
+            $user = Auth::user();
+            $sevencolumns = $user->seven_columns()->orderBy('updated_at', 'desc')->paginate(5);
 
             $data = [
                 'user' => $user,
@@ -29,7 +30,7 @@ class SevenColumnsController extends Controller
     // 7コラム新規作成画面へ遷移
     public function create($id)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         $user_id = $user->id;
 
         $threecolumn = ThreeColumn::where('id', $id)->where('user_id', $user_id)->first();
@@ -61,7 +62,11 @@ class SevenColumnsController extends Controller
         DB::transaction(function () use ($request) {
 
             $seven_column = new SevenColumn();
-            // 送られてきたフォームの内容は　$request　に入っている。
+
+            $seven_column->user_id = Auth::id();
+            $seven_column->threecol_id = $request->threecol_id;
+            $seven_column->event_id = $request->event_id;
+
             $seven_column->title = $request->title;
             $seven_column->content = $request->content;
 
@@ -73,13 +78,6 @@ class SevenColumnsController extends Controller
             $seven_column->new_thinking = $request->new_thinking;
             $seven_column->new_emotion = $request->new_emotion;
 
-            // ログインしているユーザーIDを渡す
-            $seven_column->user_id = \Auth::id();
-
-            // どうするか
-            $seven_column->threecol_id = $request->threecol_id;
-            $seven_column->event_id = $request->event_id;
-
             $seven_column->save();
         });
 
@@ -90,8 +88,26 @@ class SevenColumnsController extends Controller
     public function show($id)
     {
         $seven_column = SevenColumn::find($id);
+        $threecol_id = $seven_column->threecol_id;
+        $three_column = ThreeColumn::find($threecol_id);
 
-        return view('seven_columns.show', ['seven_column' => $seven_column]);
+
+        $habit_names = [];
+        // 考え方の癖 取得
+        foreach ($three_column->habit as $habit) {
+            $habit_names[] = $habit->habit_name;
+        }
+/*
+        if ( !isset($habit_names) ) {
+            $habit_names = [];
+        }
+*/
+        //dd($habit_names);
+
+        return view('seven_columns.show', [
+            'seven_column' => $seven_column,
+            'habit_names' => $habit_names
+        ]);
     }
 
     // 編集画面表示処理
@@ -113,7 +129,11 @@ class SevenColumnsController extends Controller
                 'content' => 'required|max:255',
                 'emotion_name' => 'required',
                 'emotion_strength' => 'required',
-                'thinking' => 'required'
+                'thinking' => 'required',
+                'basis_thinking' => 'required',
+                'opposite_fact' => 'required',
+                'new_thinking' => 'required',
+                'new_emotion' => 'required'
             ]
         );
 
@@ -130,15 +150,15 @@ class SevenColumnsController extends Controller
             $seven_column->opposite_fact = $request->opposite_fact;
             $seven_column->new_thinking = $request->new_thinking;
             $seven_column->new_emotion = $request->new_emotion;
-            $seven_column->updated_at = date('Y-m-d h:i:s');
-            
+            $seven_column->updated_at = date('Y-m-d G:i:s');
+
             $seven_column->save();
         });
         // end transaction
 
         // report($e);
         // session()->flash('flash_message', 'kousinn が失敗しました。');
-    
+
         return redirect('seven_columns');
     }
 

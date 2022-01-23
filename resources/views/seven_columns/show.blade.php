@@ -52,10 +52,19 @@
   </tr>
 
   <tr>
-    <th>3 その時考えた事</th>
+    <th>3-1 その時考えた事</th>
     <td>{{ $seven_column->thinking }}</td>
   </tr>
 
+  <tr>
+    <th>3-2 考え方の癖</th>
+    <td><?php foreach($habit_names as $name) {
+                echo "・" . $name . "<br>";
+              } 
+        ?>
+    </td>
+
+  </tr>
   <tr>
     <th>4 その考えの根拠</th>
     <td>{{ $seven_column->basis_thinking }}</td>
@@ -78,16 +87,21 @@
   </tr>
 </table>
 
-<form action="{{ route('seven_columns.edit', ['param' => $seven_column->id] ) }}", method="get">
-  @CSRF
-  <button type="submit" class="btn btn-secondary btn-lg">編集</button>
-</form>
+<div class="buttons-first">
+  <form action="{{ route('seven_columns.edit', ['param' => $seven_column->id] ) }}" , method="GET">
+    @CSRF
+    <button type="submit" class="btn btn-secondary btn-lg">編集</button>
+  </form>
+</div>
 
-<form action="{{ route('seven_columns.destroy', ['param' => $seven_column->id] ) }}", method="post">
-  @CSRF
-  <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
-</form>
+<div class="buttons">
+  <form action="{{ route('seven_columns.destroy', ['param' => $seven_column->id] ) }}" method="POST">
+    @CSRF
+    <button type="submit" class="btn btn-danger btn-lg" onclick="return confirmDelete();">削除</button>
+  </form>
+</div>
 
-<button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
-
+<div class="buttons">
+  <button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
+</div>
 @endsection

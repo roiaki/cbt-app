@@ -26,9 +26,10 @@
   </tbody>
 </table>
 
-
 @endif
+
 {!! link_to_route('events.create', '新規作成', [], ['class' => 'btn btn-primary btn-lg']) !!}
+
 <div class="d-flex justify-content-center">
   {{ $events->links('pagination::bootstrap-4') }}
 </div>

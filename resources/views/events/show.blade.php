@@ -20,7 +20,6 @@
     <td>{{ $event->title }}</td>
     <td>{{ $event->content }}</td>
   </tr>
-  
 
 </table>
 <!--
@@ -31,7 +30,10 @@
       aria-pressed="true">この出来事を元に3コラムを作成
 </a>
 -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
 <div class="buttons-first">
   <form action="{{ route('three_columns.create', ['id' => $event->id]) }}" method="get">
     @CSRF
@@ -40,22 +42,36 @@
 </div>
 
 <div class="buttons">
+<<<<<<< HEAD
   <form action="{{ route('events.edit', ['event' => $event->id] ) }}", method="get">
+=======
+  <form action="{{ route('events.edit', ['event' => $event->id] ) }}" method="get">
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
     @CSRF
     <button type="submit" class="btn btn-secondary btn-lg">編集</button>
   </form>
 </div>
 
 <div class="buttons">
+<<<<<<< HEAD
   <form action="{{ route('events.delete', ['event' => $event->id] ) }}", method="post">
     @CSRF
     <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
+=======
+  <form action="{{ route('events.destroy', ['event' => $event->id] ) }}" , method="post">
+    @CSRF
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger btn-lg" onclick="return confirmDelete();">削除</button>
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
   </form>
 </div>
 
 <div class="buttons">
   <button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
 </div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 586cecb05185e71f1a58d844382c8bc266e30177
 @endsection
