@@ -20,10 +20,10 @@ Route::get('/', function () {
 // 出来事に関して
 Route::get('events', 'EventsController@index')->name('events');
 Route::get('events/create', 'EventsController@create')->name('events.create');
-Route::post('events', 'EventsController@store')->name('events.store');
+Route::post('events/store', 'EventsController@store')->name('events.store');
 Route::get('events/{event}', 'EventsController@show')->name('events.show');
 Route::get('events/{event}/edit', 'EventsController@edit')->name('events.edit');
-Route::post('events/{event}/delete}','EventsController@destroy')->name('events.destroy');
+Route::post('events/{event}/delete}','EventsController@destroy')->name('events.delete');
 Route::put('events/{event}', 'EventsController@update')->name('events.update');
 
 

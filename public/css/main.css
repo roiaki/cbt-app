@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 habit-thinking {
     display: block;
@@ -18,30 +19,47 @@ div.columns {
     
     margin: 10;
     padding: 0;
-  }
+}
 
 .habit {
     width: 140px;
 }
+
 body {
     margin-bottom: 50px;
     word-break: break-word;
 }
+
 .wrap_thinking {
     column-count: 3;
 }
+
 p {
     line-height: 2.0;
-  }
+}
+  
 .button_wrapper{
     text-align: right;
 }
+
 .button_wrappe_left {
     text-align: left;
 }
+
 .page {
     text-align: center;
 }
+
 .under_line {
     text-decoration:underline;
+}
+
+.buttons-first {
+    display: inline-block;
+    margin: 10px 20px 0px 0px;
+}
+
+.buttons {
+    display: inline-block;
+    margin: 10px 20px;
 }

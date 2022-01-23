@@ -42,7 +42,7 @@
       @endif
     </div>
 
-    {!! Form::submit('作成', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('作成', ['class' => 'btn btn-primary btn-lg']) !!}
 
     {!! Form::close() !!}
   </div>

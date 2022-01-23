@@ -42,9 +42,17 @@
       @endif
     </div>
 
-    {!! Form::submit('更新', ['class' => 'btn btn-primary btn-lg']) !!}
-
+      <div class="buttons-first">
+        {!! Form::submit('更新', ['class' => 'btn btn-primary btn-lg']) !!}
+      </div>
+    
+      <div class="buttons">
+        <button class="btn btn-outline-danger btn-lg" onclick="history.back(-1)">戻る</button>
+      </div>
+      
     {!! Form::close() !!}
+    
+
   </div>
 </div>
 

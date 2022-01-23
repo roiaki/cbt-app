@@ -139,21 +139,29 @@
   </tr>
 </table>
 
-<form action="{{ route('seven_columns.create', ['id' => $three_column->id]) }}" method="get">
-  @CSRF
-  <button type="submit" class="btn btn-success btn-lg">7コラム作成</button>
-</form>
+<div class="buttons-first">
+  <form action="{{ route('seven_columns.create', ['id' => $three_column->id]) }}" method="get">
+    @CSRF
+    <button type="submit" class="btn btn-success btn-lg">7コラム作成</button>
+  </form>
+</div>
 
-<form action="{{ route('three_columns.edit', ['param' => $three_column->id] ) }}", method="get">
-  @CSRF
-  <button type="submit" class="btn btn-secondary btn-lg">編集</button>
-</form>
+<div class="buttons">
+  <form action="{{ route('three_columns.edit', ['param' => $three_column->id] ) }}", method="get">
+    @CSRF
+    <button type="submit" class="btn btn-secondary btn-lg">編集</button>
+  </form>
+</div>
 
-<form action="{{ route('three_columns.destroy', ['param' => $three_column->id] ) }}", method="post">
-  @CSRF
-  <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
-</form>
+<div class="buttons">
+  <form action="{{ route('three_columns.destroy', ['param' => $three_column->id] ) }}", method="post">
+    @CSRF
+    <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
+  </form>
+</div>
 
-<button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
+<div class="buttons">
+  <button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
+</div>
 
 @endsection

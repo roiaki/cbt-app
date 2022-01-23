@@ -32,21 +32,30 @@
 </a>
 -->
 
-<form action="{{ route('three_columns.create', ['id' => $event->id]) }}" method="get">
-  @CSRF
-  <button type="submit" class="btn btn-success btn-lg">3コラム作成</button>
-</form>
+<div class="buttons-first">
+  <form action="{{ route('three_columns.create', ['id' => $event->id]) }}" method="get">
+    @CSRF
+    <button type="submit" class="btn btn-success btn-lg">3コラム作成</button>
+  </form>
+</div>
 
-<form action="{{ route('events.edit', ['event' => $event->id] ) }}", method="get">
-  @CSRF
-  <button type="submit" class="btn btn-secondary btn-lg">編集</button>
-</form>
+<div class="buttons">
+  <form action="{{ route('events.edit', ['event' => $event->id] ) }}", method="get">
+    @CSRF
+    <button type="submit" class="btn btn-secondary btn-lg">編集</button>
+  </form>
+</div>
 
-<form action="{{ route('events.destroy', ['event' => $event->id] ) }}", method="post">
-  @CSRF
-  <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
-</form>
+<div class="buttons">
+  <form action="{{ route('events.delete', ['event' => $event->id] ) }}", method="post">
+    @CSRF
+    <button type="submit" class="btn btn-danger btn-lg" onclick="confirmDelete();return false;">削除</button>
+  </form>
+</div>
 
-<button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
+<div class="buttons">
+  <button class="btn btn-primary btn-lg" onclick="history.back(-1)">戻る</button>
+</div>
+
 
 @endsection
